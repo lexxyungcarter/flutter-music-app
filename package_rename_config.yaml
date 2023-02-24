@@ -1,0 +1,13 @@
+package_rename_config:
+  android:
+    app_name: Music App
+    package_name: com.acelords.musicapp
+
+  ios:
+    app_name: Music App
+    bundle_name: musicapp
+    package_name: com.acelords.musicapp
+
+  # web:
+  #   app_name: Music App
+  #   description: Best music app ever
