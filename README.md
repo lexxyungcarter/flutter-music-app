@@ -6,23 +6,23 @@ Fully open-source, No tracking of users, just good vibes and music.
 ![Screenshot 1](_files/screenshot-1.png)
 
 ## Todo
-[x] Home: Setup
-[x] Player interface
-[] Bottom navbar mods
-[] Move Player state to provider
-[] Trending page real-time updates for latest music (Spotify/Soundhound/YouTube API maybe?)
-[] Visualization effects
-[] EQ
-[] Theming - Change backgrounds as per the album art
-[] Create & save playlists
-[] Scan local files/folders for music
-[] Fetch album art online
-[] Fetch music lyrics in realtime
-[] Share song via socials (Only file/title/artist info to avoid piracy)
-[] Settings: crossfade options + (start & end) of crossfades
-[] Settings: Different themes
-[] Settings: Sign in/up for playlist cloud sync (playlists, favourites)
-[] Cloud sync and listen with friend in real-time (e.g. for karaoke purposes) 
+- [x] Home: Setup
+- [x] Player interface
+- [ ] Bottom navbar mods
+- [ ] Move Player state to provider
+- [ ] Trending page real-time updates for latest music (Spotify/Soundhound/YouTube API maybe?)
+- [ ] Visualization effects
+- [ ] EQ
+- [ ] Theming - Change backgrounds as per the album art
+- [ ] Create & save playlists
+- [ ] Scan local files/folders for music
+- [ ] Fetch album art online
+- [ ] Fetch music lyrics in realtime
+- [ ] Share song via socials (Only file/title/artist info to avoid piracy)
+- [ ] Settings: crossfade options + (start & end) of crossfades
+- [ ] Settings: Different themes
+- [ ] Settings: Sign in/up for playlist cloud sync (playlists, favourites)
+- [ ] Cloud sync and listen with friend in real-time (e.g. for karaoke purposes) 
 
 ### Live Checklist
 - update version in pubspec.yaml
