@@ -65,7 +65,8 @@ class _SeekbarState extends State<Seekbar> {
             ),
             child: Slider(
               min: 0,
-              max: widget.duration.inMilliseconds.toDouble() + 10,
+              max: widget.duration.inMilliseconds.toDouble() +
+                  1000, // added to compensate for milliseconds conversion difference
               value: min(
                 _dragValue ?? widget.position.inMilliseconds.toDouble(),
                 widget.position.inMilliseconds.toDouble(),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../utils/app_styling.dart';
 import '../../data/providers/playlist_provider.dart';
+import '../screens/playlists_screen.dart';
 import 'playlist_card.dart';
 import 'section_header.dart';
 
@@ -26,7 +28,7 @@ class _PlaylistsState extends ConsumerState<Playlists> {
           child: SectionHeader(
             title: 'Playlists',
             action: 'View More',
-            onActionPressed: () {},
+            onActionPressed: () => context.pushNamed(PlaylistsScreen.route),
           ),
         ),
         Padding(

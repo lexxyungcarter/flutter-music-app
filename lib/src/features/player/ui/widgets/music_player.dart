@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../utils/app_styling.dart';
 import '../../../../utils/extensions.dart';
-import '../../data/models/seek_bar_data.dart';
-import '../../data/models/song.dart';
+import '../../data/providers/player_provider.dart';
 import 'player_buttons.dart';
 import 'seekbar.dart';
 
-class MusicPlayer extends StatelessWidget {
+class MusicPlayer extends ConsumerWidget {
   const MusicPlayer({
     super.key,
-    required this.seekBarDataStream,
-    required this.player,
-    required this.song,
   });
 
-  final Stream<SeekBarData> seekBarDataStream;
-  final AudioPlayer player;
-  final Song song;
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentSong =
+        ref.watch(playerProvider.select((value) => value.currentSong));
+    final seekBarDataStream = ref.watch(seekBarDataStreamProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -32,7 +28,7 @@ class MusicPlayer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            song.title,
+            currentSong!.title,
             style: context.headlineSmall!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -42,25 +38,37 @@ class MusicPlayer extends StatelessWidget {
             height: 10,
           ),
           Text(
-            song.description,
+            currentSong!.description,
             style: context.bodySmall!.copyWith(
               color: Colors.white,
             ),
           ),
           AppStyling.spacer,
-          StreamBuilder<SeekBarData>(
-            stream: seekBarDataStream,
-            builder: (context, snapshot) {
-              final positionData = snapshot.data;
-
-              return Seekbar(
-                position: positionData?.position ?? Duration.zero,
-                duration: positionData?.duration ?? Duration.zero,
-                onChanged: player.seek,
-              );
-            },
+          seekBarDataStream.when(
+            data: (positionData) => Seekbar(
+              position: positionData?.position ?? Duration.zero,
+              duration: positionData?.duration ?? Duration.zero,
+              onChanged:
+                  ref.read(playerProvider.notifier).getPlayerInstance().seek,
+            ),
+            loading: () => const Center(child: LinearProgressIndicator()),
+            error: (error, stackTrace) => Text(error.toString()),
           ),
-          PlayerButtons(player: player),
+
+          // StreamBuilder<SeekBarData>(
+          //   stream: seekBarDataStream,
+          //   builder: (context, snapshot) {
+          //     final positionData = snapshot.data;
+
+          //     return Seekbar(
+          //       position: positionData?.position ?? Duration.zero,
+          //       duration: positionData?.duration ?? Duration.zero,
+          //       onChanged:
+          //           ref.read(playerProvider.notifier).getPlayerInstance().seek,
+          //     );
+          //   },
+          // ),
+          const PlayerButtons(),
           AppStyling.spacer,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,28 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 
 import '../../../../utils/helpers.dart';
+import '../../data/providers/player_provider.dart';
 
-class PlayerButtons extends StatelessWidget {
+class PlayerButtons extends ConsumerWidget {
   const PlayerButtons({
     super.key,
-    required AudioPlayer player,
-  }) : _player = player;
-
-  final AudioPlayer _player;
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         StreamBuilder<SequenceState?>(
-          stream: _player.sequenceStateStream,
+          stream: ref
+              .read(playerProvider.notifier)
+              .getPlayerInstance()
+              .sequenceStateStream,
           builder: (context, snapshot) {
             return IconButton(
               onPressed: () {
-                if (_player.hasPrevious) {
-                  _player.seekToPrevious();
+                if (ref
+                    .read(playerProvider.notifier)
+                    .getPlayerInstance()
+                    .hasPrevious) {
+                  ref
+                      .read(playerProvider.notifier)
+                      .getPlayerInstance()
+                      .seekToPrevious();
                 } else {
                   showInfoToast('No previous song');
                 }
@@ -36,7 +44,10 @@ class PlayerButtons extends StatelessWidget {
           },
         ),
         StreamBuilder<PlayerState>(
-          stream: _player.playerStateStream,
+          stream: ref
+              .read(playerProvider.notifier)
+              .getPlayerInstance()
+              .playerStateStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final playerState = snapshot.data;
@@ -52,9 +63,15 @@ class PlayerButtons extends StatelessWidget {
                     color: Colors.deepPurple.shade400,
                   ),
                 );
-              } else if (!_player.playing) {
+              } else if (!ref
+                  .read(playerProvider.notifier)
+                  .getPlayerInstance()
+                  .playing) {
                 return IconButton(
-                  onPressed: _player.play,
+                  onPressed: ref
+                      .read(playerProvider.notifier)
+                      .getPlayerInstance()
+                      .play,
                   icon: const Icon(
                     Icons.play_circle,
                     color: Colors.white,
@@ -63,7 +80,10 @@ class PlayerButtons extends StatelessWidget {
                 );
               } else if (processingState != ProcessingState.completed) {
                 return IconButton(
-                  onPressed: _player.pause,
+                  onPressed: ref
+                      .read(playerProvider.notifier)
+                      .getPlayerInstance()
+                      .pause,
                   icon: const Icon(
                     Icons.pause_circle,
                     color: Colors.white,
@@ -72,10 +92,17 @@ class PlayerButtons extends StatelessWidget {
                 );
               } else {
                 return IconButton(
-                  onPressed: () => _player.seek(
-                    Duration.zero,
-                    index: _player.effectiveIndices!.first,
-                  ),
+                  onPressed: () => ref
+                      .read(playerProvider.notifier)
+                      .getPlayerInstance()
+                      .seek(
+                        Duration.zero,
+                        index: ref
+                            .read(playerProvider.notifier)
+                            .getPlayerInstance()
+                            .effectiveIndices!
+                            .first,
+                      ),
                   icon: const Icon(
                     Icons.replay_circle_filled_outlined,
                     color: Colors.white,
@@ -94,12 +121,21 @@ class PlayerButtons extends StatelessWidget {
           },
         ),
         StreamBuilder<SequenceState?>(
-          stream: _player.sequenceStateStream,
+          stream: ref
+              .read(playerProvider.notifier)
+              .getPlayerInstance()
+              .sequenceStateStream,
           builder: (context, snapshot) {
             return IconButton(
               onPressed: () {
-                if (_player.hasNext) {
-                  _player.seekToNext();
+                if (ref
+                    .read(playerProvider.notifier)
+                    .getPlayerInstance()
+                    .hasNext) {
+                  ref
+                      .read(playerProvider.notifier)
+                      .getPlayerInstance()
+                      .seekToNext();
                 } else {
                   showInfoToast('No next song');
                 }

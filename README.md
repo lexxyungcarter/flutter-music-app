@@ -9,6 +9,7 @@ Fully open-source, No tracking of users, just good vibes and music.
 - [x] Home: Setup
 - [x] Player interface
 - [ ] Bottom navbar mods
+- [ ] Search music
 - [ ] Move Player state to provider
 - [ ] Trending page real-time updates for latest music (Spotify/Soundhound/YouTube API maybe?)
 - [ ] Visualization effects
@@ -24,7 +25,7 @@ Fully open-source, No tracking of users, just good vibes and music.
 - [ ] Settings: Sign in/up for playlist cloud sync (playlists, favourites)
 - [ ] Cloud sync and listen with friend in real-time (e.g. for karaoke purposes) 
 
-### Live Checklist
+### Going Live Checklist
 - update version in pubspec.yaml
 - utils > contants.dart
     - set appversion
@@ -96,4 +97,5 @@ adb connect 192.168.100.20:12345
 Any music and art provided here belong to their respective copyright holders. They are only to be used for demo purposes in the early stages of development (and thereafter shall be removed). Please don't distribute them without checking their individual distribution rights.
 
 
-
+## License
+- [DON'T BE A DICK PUBLIC LICENSE](LICENSE)

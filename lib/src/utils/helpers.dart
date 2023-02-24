@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:pluralize/pluralize.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:validators/validators.dart';
@@ -133,4 +134,15 @@ String pluralize(String msg, num count) {
   }
 
   return pluralize.plural(msg);
+}
+
+/// check if the player is currently playing a song
+bool isPlayerPlaying(AudioPlayer player) {
+  return !player.playing ||
+      player.playerState.processingState == ProcessingState.completed;
+}
+
+bool isPlayerPaused(AudioPlayer player) {
+  return !player.playing ||
+      player.playerState.processingState == ProcessingState.ready;
 }

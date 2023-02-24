@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'features/home/ui/home_screen.dart';
 import 'features/player/ui/screens/player_home_screen.dart';
 import 'features/player/ui/screens/playlist_screen.dart';
+import 'features/player/ui/screens/playlists_screen.dart';
 import 'features/player/ui/screens/song_screen.dart';
+import 'features/player/ui/screens/songs_screen.dart';
 import 'features/settings/ui/settings_screen.dart';
 import 'features/shared/ui/error_screen.dart';
 
@@ -31,9 +33,19 @@ final GoRouter router = GoRouter(
           builder: (context, state) => const SongScreen(),
         ),
         GoRoute(
+          path: 'songs',
+          name: SongsScreen.route,
+          builder: (context, state) => const SongsScreen(),
+        ),
+        GoRoute(
           path: 'playlist',
           name: PlaylistScreen.route,
           builder: (context, state) => const PlaylistScreen(),
+        ),
+        GoRoute(
+          path: 'playlists',
+          name: PlaylistsScreen.route,
+          builder: (context, state) => const PlaylistsScreen(),
         ),
         GoRoute(
           path: 'settings',

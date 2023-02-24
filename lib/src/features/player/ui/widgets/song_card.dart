@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:marquee/marquee.dart';
 
 import '../../../../utils/extensions.dart';
+import '../../../../utils/helpers.dart';
 import '../../data/models/song.dart';
-import '../../data/providers/song_provider.dart';
+import '../../data/providers/player_provider.dart';
 import '../screens/song_screen.dart';
 
 class SongCard extends ConsumerStatefulWidget {
@@ -21,10 +22,26 @@ class _SongCardState extends ConsumerState<SongCard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final currentSong =
+        ref.watch(playerProvider.select((value) => value.currentSong));
 
     return InkWell(
       onTap: () {
-        ref.read(selectedSongProvider.notifier).setSong(widget.song);
+        // prevent replaying song if already playing
+        if (currentSong != widget.song) {
+          ref.read(playerProvider.notifier).playSong(widget.song);
+        } else {
+          // check if player is paused and unpause the song
+          if (isPlayerPaused(
+              ref.read(playerProvider.notifier).getPlayerInstance())) {
+            ref.read(playerProvider.notifier).play();
+          }
+          // check if player is currently playing
+          else if (isPlayerPlaying(
+              ref.read(playerProvider.notifier).getPlayerInstance())) {
+            ref.read(playerProvider.notifier).playSong(widget.song);
+          }
+        }
         context.pushNamed(SongScreen.route);
       },
       child: Container(
