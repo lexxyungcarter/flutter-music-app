@@ -39,7 +39,7 @@ class _SongScreenState extends ConsumerState<SongScreen> {
         children: [
           currentSong != null
               ? Image.network(
-                  currentSong?.coverUrl ?? '-',
+                  currentSong.coverUrl,
                   fit: BoxFit.cover,
                 )
               : Container(),

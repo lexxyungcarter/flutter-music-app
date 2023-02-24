@@ -18,7 +18,6 @@ class Playlists extends ConsumerStatefulWidget {
 class _PlaylistsState extends ConsumerState<Playlists> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final playlists = ref.watch(playlistProvider);
 
     return Column(

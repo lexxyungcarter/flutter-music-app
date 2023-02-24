@@ -4,7 +4,7 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../../utils/app_styling.dart';
 import '../../../utils/extensions.dart';
-import '../../shared/ui/appbar_loading.dart';
+import '../../player/ui/widgets/appbar.dart';
 import '../data/providers/theme_provider.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -29,44 +29,50 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     //   });
     // });
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings', style: context.displaySmall),
-        bottom: createProgressIndicator(loading: loading),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: AppStyling.bgGradient,
       ),
-      body: Container(
-        padding: AppStyling.pagePadding,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ListTile(
-                title: Text('Dark Mode', style: context.bodyMedium),
-                leading: const Icon(Ionicons.contrast_outline),
-                trailing: Switch(
-                  value: theme.isDarkMode,
-                  onChanged: (value) {
-                    ref.read(themeProvider.notifier).toggle();
+      child: Scaffold(
+        appBar: Appbar(
+          title: 'Settings',
+          onIconPressed: () => Navigator.of(context).pop(),
+        ),
+        backgroundColor: Colors.transparent,
+        body: Container(
+          padding: AppStyling.pagePadding,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text('Dark Mode', style: context.bodyMedium),
+                  leading: const Icon(Ionicons.contrast_outline),
+                  trailing: Switch(
+                    value: theme.isDarkMode,
+                    onChanged: (value) {
+                      ref.read(themeProvider.notifier).toggle();
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ListTile(
+                  leading: const Icon(Ionicons.refresh_circle_outline),
+                  title: Text('Reset App (Delete app data)',
+                      style: context.bodyMedium),
+                  trailing: const Icon(Ionicons.chevron_forward_outline),
+                  onTap: () {
+                    // ref.read(onboardingProvider.notifier).reset();
+                    // Navigator.pushNamedAndRemoveUntil(
+                    //   context,
+                    //   HomeScreen.route,
+                    //   (route) => false,
+                    // );
                   },
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ListTile(
-                leading: const Icon(Ionicons.refresh_circle_outline),
-                title: Text('Reset App (Delete app data)',
-                    style: context.bodyMedium),
-                trailing: const Icon(Ionicons.chevron_forward_outline),
-                onTap: () {
-                  // ref.read(onboardingProvider.notifier).reset();
-                  // Navigator.pushNamedAndRemoveUntil(
-                  //   context,
-                  //   HomeScreen.route,
-                  //   (route) => false,
-                  // );
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

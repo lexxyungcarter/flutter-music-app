@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 extension TypographyUtils on BuildContext {
   ThemeData get theme => Theme.of(this);

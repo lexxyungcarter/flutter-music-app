@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../utils/app_styling.dart';
+import '../../../settings/ui/settings_screen.dart';
 import '../widgets/appbar.dart';
 import '../widgets/bottom_navbar.dart';
 import '../widgets/discover_music.dart';
+import '../widgets/mini_player.dart';
 import '../widgets/playlists.dart';
 import '../widgets/trending.dart';
 
@@ -26,11 +29,18 @@ class _PlayerHomeScreenState extends ConsumerState<PlayerHomeScreen> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: const Appbar(
+        appBar: Appbar(
           icon: Icons.grid_view_rounded,
           showAvatar: true,
+          onIconPressed: () => context.pushNamed(SettingsScreen.route),
         ),
-        bottomNavigationBar: const BottomNavbar(),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            MiniPlayer(),
+            BottomNavbar(),
+          ],
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

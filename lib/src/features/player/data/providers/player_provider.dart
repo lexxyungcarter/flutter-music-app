@@ -7,10 +7,10 @@ import '../models/player_state.dart' as custom_player_state;
 import '../models/seek_bar_data.dart';
 import '../models/song.dart';
 
-final playerProvider =
-    StateNotifierProvider<PlayerStateNotifier, custom_player_state.PlayerState>(
-        (ref) => PlayerStateNotifier(
-            custom_player_state.PlayerState.initial(), AudioPlayer()));
+final playerProvider = StateNotifierProvider.autoDispose<PlayerStateNotifier,
+        custom_player_state.PlayerState>(
+    (ref) => PlayerStateNotifier(
+        custom_player_state.PlayerState.initial(), AudioPlayer()));
 
 class PlayerStateNotifier
     extends StateNotifier<custom_player_state.PlayerState> {
@@ -157,6 +157,11 @@ class PlayerStateNotifier
     }
   }
 
+  void clear() {
+    stop();
+    state = custom_player_state.PlayerState.reset();
+  }
+
   @override
   void dispose() {
     _player.dispose();
@@ -164,7 +169,8 @@ class PlayerStateNotifier
   }
 }
 
-final seekBarDataStreamProvider = StreamProvider<SeekBarData>((ref) {
+final seekBarDataStreamProvider =
+    StreamProvider.autoDispose<SeekBarData>((ref) {
   final player = ref.read(playerProvider.notifier).getPlayerInstance();
   return rxdart.Rx.combineLatest2<Duration, Duration?, SeekBarData>(
       player.positionStream,

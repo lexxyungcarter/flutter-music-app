@@ -38,7 +38,7 @@ class MusicPlayer extends ConsumerWidget {
             height: 10,
           ),
           Text(
-            currentSong!.description,
+            currentSong.description,
             style: context.bodySmall!.copyWith(
               color: Colors.white,
             ),

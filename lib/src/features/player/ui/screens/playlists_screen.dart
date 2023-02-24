@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../utils/app_styling.dart';
 import '../widgets/appbar.dart';
+import '../widgets/mini_player.dart';
 
 class PlaylistsScreen extends StatefulHookConsumerWidget {
   const PlaylistsScreen({Key? key}) : super(key: key);
@@ -26,11 +27,10 @@ class _PlaylistsScreenState extends ConsumerState<PlaylistsScreen> {
           onIconPressed: () => Navigator.of(context).pop(),
         ),
         backgroundColor: Colors.transparent,
+        bottomNavigationBar: const MiniPlayer(),
         body: SingleChildScrollView(
           child: Column(
-            children: const [
-              Text('Playlists Page'),
-            ],
+            children: const [],
           ),
         ),
       ),

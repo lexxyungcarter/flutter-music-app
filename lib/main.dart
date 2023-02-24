@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
 
-import 'src/features/home/ui/base_widget.dart';
 import 'src/features/settings/data/providers/theme_provider.dart';
 import 'src/router.dart';
 import 'src/utils/app_theme.dart';
@@ -57,7 +56,6 @@ class _MyAppState extends ConsumerState<MyApp> {
         useMaterial3: true,
       ),
       themeMode: theme.mode,
-      builder: (context, child) => BaseWidget(child: child),
     );
   }
 }

@@ -7,8 +7,8 @@ import '../../../../utils/extensions.dart';
 import '../../data/models/selected_playlist_state.dart';
 import '../../data/providers/player_provider.dart';
 import '../../data/providers/playlist_provider.dart';
-import '../../data/providers/songs_provider.dart';
 import '../widgets/appbar.dart';
+import '../widgets/mini_player.dart';
 import 'song_screen.dart';
 
 class PlaylistScreen extends ConsumerStatefulWidget {
@@ -35,6 +35,7 @@ class _PlaylistScreenState extends ConsumerState<PlaylistScreen> {
           onIconPressed: () => Navigator.of(context).pop(),
         ),
         backgroundColor: Colors.transparent,
+        bottomNavigationBar: const MiniPlayer(),
         body: SingleChildScrollView(
           padding: AppStyling.pagePadding,
           child: playlistState.playlist == null
@@ -150,7 +151,7 @@ class PlayOrShuffleSwitch extends ConsumerWidget {
                           child: Text(
                             'Play',
                             style: context.headlineSmall!.copyWith(
-                              color: !isShuffleOn!
+                              color: !isShuffleOn
                                   ? Colors.white
                                   : Colors.deepPurple,
                             ),
@@ -162,7 +163,7 @@ class PlayOrShuffleSwitch extends ConsumerWidget {
                         Icon(
                           Icons.play_circle,
                           color:
-                              !isShuffleOn! ? Colors.white : Colors.deepPurple,
+                              !isShuffleOn ? Colors.white : Colors.deepPurple,
                         ),
                       ],
                     ),
@@ -175,7 +176,7 @@ class PlayOrShuffleSwitch extends ConsumerWidget {
                           child: Text(
                             'Shuffle',
                             style: context.headlineSmall!.copyWith(
-                              color: isShuffleOn!
+                              color: isShuffleOn
                                   ? Colors.white
                                   : Colors.deepPurple,
                             ),
@@ -186,8 +187,7 @@ class PlayOrShuffleSwitch extends ConsumerWidget {
                         ),
                         Icon(
                           Icons.shuffle,
-                          color:
-                              isShuffleOn! ? Colors.white : Colors.deepPurple,
+                          color: isShuffleOn ? Colors.white : Colors.deepPurple,
                         ),
                       ],
                     ),

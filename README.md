@@ -8,12 +8,16 @@ Fully open-source, No tracking of users, just good vibes and music.
 ## Todo
 - [x] Home: Setup
 - [x] Player interface
+- [x] Move Player state to provider
+- [ ] Add play/shuffle playlist
+- [ ] Smooth volume fade on start, pause, and stop
 - [ ] Bottom navbar mods
 - [ ] Search music
-- [ ] Move Player state to provider
+- [ ] Add seekbar in miniplayer
 - [ ] Trending page real-time updates for latest music (Spotify/Soundhound/YouTube API maybe?)
 - [ ] Visualization effects
 - [ ] EQ
+- [ ] Onboarding Screen
 - [ ] Theming - Change backgrounds as per the album art
 - [ ] Create & save playlists
 - [ ] Scan local files/folders for music

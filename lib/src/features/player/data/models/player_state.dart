@@ -45,4 +45,13 @@ class PlayerState {
         isCompleted: false,
         queue: [],
       );
+
+  factory PlayerState.reset() => PlayerState(
+        isPlaying: false,
+        isPaused: false,
+        isStopped: false,
+        isCompleted: false,
+        queue: [],
+        currentSong: null,
+      );
 }
