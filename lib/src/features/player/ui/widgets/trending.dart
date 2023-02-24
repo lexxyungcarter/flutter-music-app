@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../utils/app_styling.dart';
-import '../../data/providers/song_provider.dart';
+import '../../data/providers/songs_provider.dart';
 import '../screens/songs_screen.dart';
 import 'section_header.dart';
 import 'song_card.dart';

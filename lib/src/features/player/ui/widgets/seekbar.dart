@@ -19,7 +19,7 @@ class Seekbar extends StatefulWidget {
   final ValueChanged<Duration>? onChangedEnd;
 
   @override
-  _SeekbarState createState() => _SeekbarState();
+  State<StatefulWidget> createState() => _SeekbarState();
 }
 
 class _SeekbarState extends State<Seekbar> {

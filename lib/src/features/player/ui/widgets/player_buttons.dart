@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 
-import '../../../../utils/helpers.dart';
 import '../../data/providers/player_provider.dart';
 
 class PlayerButtons extends ConsumerWidget {
@@ -22,19 +21,7 @@ class PlayerButtons extends ConsumerWidget {
               .sequenceStateStream,
           builder: (context, snapshot) {
             return IconButton(
-              onPressed: () {
-                if (ref
-                    .read(playerProvider.notifier)
-                    .getPlayerInstance()
-                    .hasPrevious) {
-                  ref
-                      .read(playerProvider.notifier)
-                      .getPlayerInstance()
-                      .seekToPrevious();
-                } else {
-                  showInfoToast('No previous song');
-                }
-              },
+              onPressed: () => ref.read(playerProvider.notifier).goPrevious(),
               icon: const Icon(
                 Icons.skip_previous,
                 size: 45,
@@ -58,7 +45,7 @@ class PlayerButtons extends ConsumerWidget {
                 return IconButton(
                   onPressed: () {},
                   icon: Icon(
-                    Icons.cached_outlined,
+                    Icons.pause_circle,
                     size: 75,
                     color: Colors.deepPurple.shade400,
                   ),
@@ -68,10 +55,7 @@ class PlayerButtons extends ConsumerWidget {
                   .getPlayerInstance()
                   .playing) {
                 return IconButton(
-                  onPressed: ref
-                      .read(playerProvider.notifier)
-                      .getPlayerInstance()
-                      .play,
+                  onPressed: () => ref.read(playerProvider.notifier).play(),
                   icon: const Icon(
                     Icons.play_circle,
                     color: Colors.white,
@@ -80,10 +64,7 @@ class PlayerButtons extends ConsumerWidget {
                 );
               } else if (processingState != ProcessingState.completed) {
                 return IconButton(
-                  onPressed: ref
-                      .read(playerProvider.notifier)
-                      .getPlayerInstance()
-                      .pause,
+                  onPressed: () => ref.read(playerProvider.notifier).pause(),
                   icon: const Icon(
                     Icons.pause_circle,
                     color: Colors.white,
@@ -92,17 +73,7 @@ class PlayerButtons extends ConsumerWidget {
                 );
               } else {
                 return IconButton(
-                  onPressed: () => ref
-                      .read(playerProvider.notifier)
-                      .getPlayerInstance()
-                      .seek(
-                        Duration.zero,
-                        index: ref
-                            .read(playerProvider.notifier)
-                            .getPlayerInstance()
-                            .effectiveIndices!
-                            .first,
-                      ),
+                  onPressed: () => ref.read(playerProvider.notifier).replay(),
                   icon: const Icon(
                     Icons.replay_circle_filled_outlined,
                     color: Colors.white,
@@ -127,19 +98,7 @@ class PlayerButtons extends ConsumerWidget {
               .sequenceStateStream,
           builder: (context, snapshot) {
             return IconButton(
-              onPressed: () {
-                if (ref
-                    .read(playerProvider.notifier)
-                    .getPlayerInstance()
-                    .hasNext) {
-                  ref
-                      .read(playerProvider.notifier)
-                      .getPlayerInstance()
-                      .seekToNext();
-                } else {
-                  showInfoToast('No next song');
-                }
-              },
+              onPressed: () => ref.read(playerProvider.notifier).goNext(),
               icon: const Icon(
                 Icons.skip_next,
                 size: 45,

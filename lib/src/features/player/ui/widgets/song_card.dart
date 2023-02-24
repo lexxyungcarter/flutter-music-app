@@ -22,23 +22,20 @@ class _SongCardState extends ConsumerState<SongCard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final currentSong =
-        ref.watch(playerProvider.select((value) => value.currentSong));
+    final playerState = ref.watch(playerProvider);
 
     return InkWell(
       onTap: () {
         // prevent replaying song if already playing
-        if (currentSong != widget.song) {
+        if (playerState.currentSong != widget.song) {
           ref.read(playerProvider.notifier).playSong(widget.song);
         } else {
           // check if player is paused and unpause the song
-          if (isPlayerPaused(
-              ref.read(playerProvider.notifier).getPlayerInstance())) {
+          if (playerState.isPaused!) {
             ref.read(playerProvider.notifier).play();
           }
           // check if player is currently playing
-          else if (isPlayerPlaying(
-              ref.read(playerProvider.notifier).getPlayerInstance())) {
+          else if (!playerState.isPlaying!) {
             ref.read(playerProvider.notifier).playSong(widget.song);
           }
         }

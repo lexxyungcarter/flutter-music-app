@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/playlist.dart';
 import '../models/selected_playlist_state.dart';
-import 'song_provider.dart';
+import 'songs_provider.dart';
 
 final playlistProvider = Provider<List<Playlist>>((ref) {
   final songs = ref.watch(songsProvider);

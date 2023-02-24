@@ -5,8 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../../../utils/app_styling.dart';
 import '../../../../utils/extensions.dart';
 import '../../data/models/selected_playlist_state.dart';
+import '../../data/providers/player_provider.dart';
 import '../../data/providers/playlist_provider.dart';
-import '../../data/providers/song_provider.dart';
+import '../../data/providers/songs_provider.dart';
 import '../widgets/appbar.dart';
 import 'song_screen.dart';
 
@@ -74,7 +75,7 @@ class PlaylistSongs extends ConsumerWidget {
 
           return ListTile(
             onTap: () {
-              ref.read(selectedSongProvider.notifier).setSong(item);
+              ref.read(playerProvider.notifier).playSong(item);
               context.pushNamed(SongScreen.route);
             },
             leading: Text(

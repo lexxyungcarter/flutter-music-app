@@ -52,9 +52,7 @@ class _SongScreenState extends ConsumerState<SongScreen> {
 }
 
 class _BackgroundFilter extends StatelessWidget {
-  const _BackgroundFilter({
-    super.key,
-  });
+  const _BackgroundFilter();
 
   @override
   Widget build(BuildContext context) {

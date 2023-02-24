@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/selected_song_state.dart';
 import '../models/song.dart';
 
 final songsProvider = Provider<List<Song>>(
@@ -29,15 +28,3 @@ final songsProvider = Provider<List<Song>>(
     ),
   ],
 );
-
-final selectedSongProvider =
-    StateNotifierProvider<SelectedSongNotifier, SelectedSongState>(
-        (ref) => SelectedSongNotifier(SelectedSongState.initial()));
-
-class SelectedSongNotifier extends StateNotifier<SelectedSongState> {
-  SelectedSongNotifier(super.state);
-
-  void setSong(Song song) {
-    state = state.copyWith(song: song);
-  }
-}

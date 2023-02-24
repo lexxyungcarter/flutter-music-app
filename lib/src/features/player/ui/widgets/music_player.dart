@@ -46,10 +46,9 @@ class MusicPlayer extends ConsumerWidget {
           AppStyling.spacer,
           seekBarDataStream.when(
             data: (positionData) => Seekbar(
-              position: positionData?.position ?? Duration.zero,
-              duration: positionData?.duration ?? Duration.zero,
-              onChanged:
-                  ref.read(playerProvider.notifier).getPlayerInstance().seek,
+              position: positionData.position,
+              duration: positionData.duration,
+              onChanged: ref.read(playerProvider.notifier).seek,
             ),
             loading: () => const Center(child: LinearProgressIndicator()),
             error: (error, stackTrace) => Text(error.toString()),
